@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\volunteer;
+use App\Link;
 
 class VolunteersController extends Controller
 {
@@ -23,7 +24,19 @@ class VolunteersController extends Controller
       $volunteers = volunteer::paginate(5);
       return view('admin.volunteers.index')->withVolunteers($volunteers);
     }
-    
+
+
+
+
+    // public function search(Request $request){
+    //
+    //   	$volunteers = Volunteer::where('First_Name',$request['search'])->get();
+    //   	if(!is_null($volunteers)){
+    //   		return view('admin.volunteers.index',compact('volunteers'));
+    //   	}else{
+    //   		return "no such name";
+    //   	}
+    //   }
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +45,8 @@ class VolunteersController extends Controller
      */
     public function create()
     {
-        return view ('admin.volunteers.create');
+      $links=link::all();
+        return view ('admin.volunteers.create',compact('links'));
     }
 
     /**
@@ -64,6 +78,7 @@ class VolunteersController extends Controller
           $volunteer->Education_Level = $request->Education_Level;
           $volunteer->Area_of_Intrest = $request->Area_of_Intrest;
           $volunteer->Category = $request->Category;
+          $volunteer->link_id=$request->link_id;
           $volunteer->save();
           return redirect()->route('admin.volunteers.index');
     }
@@ -74,9 +89,10 @@ class VolunteersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(volunteer $volunteer)
     {
-        //
+      $arr['volunteer'] = $volunteer;
+      return view ('admin.volunteers.show')->with($arr);
     }
 
 
@@ -91,7 +107,9 @@ class VolunteersController extends Controller
      public function edit(volunteer $volunteer)
          {
              $arr['volunteer'] = $volunteer;
-             return view ('admin.volunteers.edit')->with($arr);
+             $links=link::all();
+             
+             return view ('admin.volunteers.edit',compact('links'))->with($arr);
          }
 
     /**
@@ -115,6 +133,8 @@ class VolunteersController extends Controller
              else
                  $file = $volunteer->image;
          }
+
+
          $volunteer->image = $file;
          $volunteer->First_Name = $request->First_Name;
          $volunteer->Last_Name = $request->Last_Name;
@@ -127,8 +147,9 @@ class VolunteersController extends Controller
          $volunteer->Education_Level = $request->Education_Level;
          $volunteer->Area_of_Intrest = $request->Area_of_Intrest;
          $volunteer->Category = $request->Category;
+         $volunteer->link_id=$request->link_id;
 
-         $volunteer->save();
+         $volunteer->update();
          return redirect()->route('admin.volunteers.index');
      }
 

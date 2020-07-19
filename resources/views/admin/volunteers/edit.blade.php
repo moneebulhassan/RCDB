@@ -101,6 +101,25 @@
       </div>
     </div>
 
+    <div class="form-group">
+        <div class="row">
+      <label class="col-md-3">Select Link</label>
+      <div class="col-md-6">
+      <select class="form-control" id="Gender" name="link_id"  autofocus>
+        <option  selected></option>
+        @foreach($links  as $link)
+            <option    {{$volunteer->link_id==$link->id ?"selected":"nothing"  }}    value={{$link->id}}>
+              {{$link->Name_of_link}}
+            </option>
+            @endforeach
+
+
+    </select>
+      <div class="clearfix"></div>
+    </div>
+      </div>
+      </div>
+
 
 
     <div class="form-group">

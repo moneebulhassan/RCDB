@@ -22,5 +22,7 @@ Auth::routes();
 Route::get('/admin', 'HomeController@index')->name('home');
 //
 // Route::get('/admin/categories', 'CategoriesController@index')->name('list_category');
+Route::post('search','Admin\VolunteersController@search')->name('search');
 Route::resource('/admin/links','Admin\linksController',['as'=>'admin']);
+Route::resource('/admin/branches','Admin\branchesController',['as'=>'admin']);
 Route::resource('/admin/volunteers','Admin\VolunteersController',['as'=>'admin']);

@@ -16,6 +16,7 @@ class CreateVolunteersTable extends Migration
         Schema::create('volunteers', function (Blueprint $table) {
           $table->id();
           $table->string('First_Name');
+          $table->UnsignedBigInteger('link_id');
           $table->string('Last_Name');
           $table->date('Date_of_Birth');
           $table->string('Place_of_Birth');

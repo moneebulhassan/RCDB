@@ -43,6 +43,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('admin.links.index')}}" class="nav-link">Links</a>
       </li>
+
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('admin.volunteers.index')}}" class="nav-link">Volunteer form</a>
       </li>
@@ -116,6 +117,18 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('admin.branches.index')}}" class="nav-link
+            @if($segment=='branches')
+            active
+            @endif
+            ">
+              <i class="nav-icon fa fa-th"></i>
+              <p>
+                Branch
+              </p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a href="{{route('admin.volunteers.index')}}" class="nav-link
             @if($segment=='volunteers')
@@ -128,6 +141,8 @@
                 volunteer Form
               </p>
             </a>
+
+            
 
           </li>
 

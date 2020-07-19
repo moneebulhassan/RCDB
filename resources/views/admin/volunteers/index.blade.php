@@ -23,8 +23,20 @@
     <p>
       <a href="{{ route ('admin.volunteers.create') }}" class="btn btn-primary">Add New member</a>
 
+      <form class="form-inline ml-3" method="post" action="{{url('search')}}">
+      @csrf
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" name="search" placeholder="Search"
+             aria-label="Search"  >
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
 
-    
+
 
 
     </p>
@@ -35,8 +47,9 @@
   			<th>First Name</th>
         <th>Last Name</th>
         <th>Gender</th>
+        <th>Volunteer Category</th>
   			<th>Action</th>
-        <th>Category</th>
+
   		</tr>
       @if(count($volunteers))
       <?php $no = 1; ?>
@@ -46,11 +59,13 @@
   				<td>{{ $n->First_Name }}</td>
           <td>{{ $n->Last_Name }}</td>
           <td>{{ $n->Gender }}</td>
-          <td>{{ $n->Category }}</td>
+          <td>{{ $n->Category}}</td>
 
+        
   				<td>
             <a href="{{ route('admin.volunteers.edit',$n->id) }}" class="btn btn-info">Edit</a>
             <a href="javascript:void(0)" onclick="$(this).parent().find('form').submit()" class="btn btn-danger">Delete</a>
+              <a href="{{ route('admin.volunteers.show',$n->id) }}" class="btn btn-info">Show</a>
 
             <form action="{{ route('admin.volunteers.destroy',$n->id) }}" method="post">
               @method('DELETE')
